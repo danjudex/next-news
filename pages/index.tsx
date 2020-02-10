@@ -1,7 +1,15 @@
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap';
 import AlbumCard from '~/components/AlbumCard';
+import { getEverything } from '../utils/newsapi';
+// eslint-disable-next-line no-unused-vars
+import { NextPage } from 'next';
+import { NewsItem } from '../interfaces';
 
-const HomePage = (): React.ReactNode => (
+interface HomePageProps {
+  news: NewsItem[];
+}
+
+const HomePage: NextPage<HomePageProps> = ({ news }) => (
   <main role="main">
     <Jumbotron className="text-center">
       <Container>
@@ -27,7 +35,7 @@ const HomePage = (): React.ReactNode => (
       <Container>
         <Row>
           <Col md="4">
-            <AlbumCard />
+            <AlbumCard imageSrc="holder.js/100px180" text="123" />
           </Col>
         </Row>
       </Container>
@@ -49,5 +57,11 @@ const HomePage = (): React.ReactNode => (
     </footer>
   </main>
 );
+
+HomePage.getInitialProps = async () => {
+  const news = await getEverything({ q: 'bitcoin' });
+
+  return { news };
+};
 
 export default HomePage;
