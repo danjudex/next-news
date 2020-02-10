@@ -1,4 +1,5 @@
 import { Card } from 'react-bootstrap';
+import './index.scss';
 
 interface AlbumProps {
   imageSrc: string;
@@ -6,7 +7,7 @@ interface AlbumProps {
 }
 
 const AlbumCard: React.FunctionComponent<AlbumProps> = ({ imageSrc, text }) => (
-  <Card>
+  <Card className="AlbumCard mb-4 box-shadow">
     <Card.Img variant="top" src={imageSrc} />
     <Card.Body>
       <Card.Text>{text}</Card.Text>

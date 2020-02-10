@@ -1,15 +1,25 @@
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap';
 import AlbumCard from '~/components/AlbumCard';
 import { getEverything } from '../utils/newsapi';
-// eslint-disable-next-line no-unused-vars
 import { NextPage } from 'next';
 import { NewsItem } from '../interfaces';
 
 interface HomePageProps {
-  news: NewsItem[];
+  newsList: NewsItem[];
 }
 
-const HomePage: NextPage<HomePageProps> = ({ news }) => (
+const newsListRender = (newsList: NewsItem[]) =>
+  newsList.map(item => (
+    <Col md="4">
+      <AlbumCard
+        key={item.source.id}
+        imageSrc={item.urlToImage}
+        text={item.title}
+      />
+    </Col>
+  ));
+
+const HomePage: NextPage<HomePageProps> = ({ newsList }) => (
   <main role="main">
     <Jumbotron className="text-center">
       <Container>
@@ -22,8 +32,7 @@ const HomePage: NextPage<HomePageProps> = ({ news }) => (
         <p>
           <a href="#" className="btn btn-primary my-2">
             Main call to action
-          </a>
-
+          </a>{' '}
           <a href="#" className="btn btn-secondary my-2">
             Secondary action
           </a>
@@ -33,11 +42,7 @@ const HomePage: NextPage<HomePageProps> = ({ news }) => (
 
     <div className="album py-5 bg-light">
       <Container>
-        <Row>
-          <Col md="4">
-            <AlbumCard imageSrc="holder.js/100px180" text="123" />
-          </Col>
-        </Row>
+        <Row>{newsListRender(newsList)}</Row>
       </Container>
     </div>
     <footer className="text-muted">
@@ -59,9 +64,9 @@ const HomePage: NextPage<HomePageProps> = ({ news }) => (
 );
 
 HomePage.getInitialProps = async () => {
-  const news = await getEverything({ q: 'bitcoin' });
+  const res = await getEverything({ q: 'react' });
 
-  return { news };
+  return { newsList: res.articles };
 };
 
 export default HomePage;
