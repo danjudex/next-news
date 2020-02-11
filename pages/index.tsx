@@ -10,12 +10,8 @@ interface HomePageProps {
 
 const newsListRender = (newsList: NewsItem[]) =>
   newsList.map(item => (
-    <Col md="4">
-      <AlbumCard
-        key={item.source.id}
-        imageSrc={item.urlToImage}
-        text={item.title}
-      />
+    <Col md="4" key={item.source.id}>
+      <AlbumCard imageSrc={item.urlToImage} text={item.title} />
     </Col>
   ));
 

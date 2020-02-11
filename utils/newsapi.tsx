@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-unfetch';
-import { NewsItem, NewsApiResponse } from '../interfaces';
+import { NewsApiResponse } from '../interfaces';
 
 const API_URL = 'https://newsapi.org/v2';
 

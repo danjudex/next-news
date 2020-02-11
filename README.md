@@ -6,7 +6,7 @@
 cp .env-dist
 ```
 
-Get NEWS_API_KEY to https://newsapi.org/register
+Get NEWS_API_KEY to <https://newsapi.org/register>
 
 ```bash
 npm i
