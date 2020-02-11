@@ -1,4 +1,4 @@
-# NEXT News
+# next-news
 
 ## Install
 
